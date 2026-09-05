@@ -322,7 +322,8 @@ function Home() {
                                                 className="post-image-modern"
                                                 loading="lazy"
                                                 onError={(e) => {
-                                                    e.target.style.display = "none";
+                                                    const wrapper = e.target.closest(".post-image-wrapper");
+                                                    if (wrapper) wrapper.style.display = "none";
                                                 }}
                                             />
                                         </div>
