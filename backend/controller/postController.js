@@ -33,18 +33,32 @@ const createPost = async (req, res) => {
 };
 
 
-// GET ALL POSTS
-// GET ALL POSTS
+// GET ALL POSTS (Supports optional pagination)
 const getAllPosts = async (req, res) => {
     try {
-        const posts = await Post.find()
+        const page = req.query.page ? parseInt(req.query.page) : null;
+        const limit = req.query.limit ? parseInt(req.query.limit) : null;
+
+        let query = Post.find()
             .populate("user", "username email")
             .populate("likes", "username")
             .populate("comments.user", "username")
             .sort({ createdAt: -1 });
 
+        const totalPosts = await Post.countDocuments();
+
+        if (page && limit) {
+            const skip = (page - 1) * limit;
+            query = query.skip(skip).limit(limit);
+        }
+
+        const posts = await query;
+
         res.status(200).json({
             message: "Posts fetched successfully",
+            totalPosts,
+            totalPages: (page && limit) ? Math.ceil(totalPosts / limit) : 1,
+            currentPage: page || 1,
             posts: posts.map(post => ({
                 _id: post._id,
 

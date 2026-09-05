@@ -1,6 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
+import { API_BASE_URL } from "../config";
 
 function Login() {
 
@@ -32,13 +33,18 @@ function Login() {
         try {
 
             const response = await axios.post(
-                "http://localhost:5000/api/auth/login",
+                `${API_BASE_URL}/api/auth/login`,
                 formData
             );
 
             localStorage.setItem(
                 "token",
                 response.data.token
+            );
+
+            localStorage.setItem(
+                "user",
+                JSON.stringify(response.data.user)
             );
 
             setMessage("Login successful!");

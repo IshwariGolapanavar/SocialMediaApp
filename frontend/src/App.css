@@ -527,24 +527,73 @@ a {
     margin-right: 5px;
 }
 
-.like-button {
+.like-toggle-button {
+    background: #f5f6f9;
+    color: #555e6d;
+    border: 1px solid #e2e5ec;
+    transition: all 0.2s ease;
+}
+
+.like-toggle-button:hover {
+    background: #eef1f6;
+    transform: translateY(-1px);
+}
+
+.like-toggle-button.liked {
     background: #fff0f3;
     color: #e44c67;
+    border-color: #ffd6df;
 }
 
-.like-button:hover {
+.like-toggle-button.liked:hover {
     background: #ffe0e7;
-    transform: translateY(-1px);
 }
 
-.unlike-button {
-    background: #f5f5f7;
-    color: #626875;
+.nav-username {
+    padding: 6px 12px;
+    background: #f0f2ff;
+    color: #586bd9;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 700;
 }
 
-.unlike-button:hover {
-    background: #e9e9ed;
-    transform: translateY(-1px);
+.loading-feed {
+    text-align: center;
+    padding: 40px;
+    color: #7b8190;
+    font-size: 16px;
+}
+
+.pagination-container {
+    text-align: center;
+    margin-top: 15px;
+    margin-bottom: 20px;
+}
+
+.load-more-button {
+    padding: 12px 28px;
+    border: 1px solid #dfe3eb;
+    border-radius: 25px;
+    background: white;
+    color: #586bd9;
+    font-weight: 700;
+    font-size: 14px;
+    cursor: pointer;
+    transition: 0.2s;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+.load-more-button:hover {
+    background: #f8f9fe;
+    border-color: #586bd9;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(88,107,217,0.15);
+}
+
+.load-more-button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
 }
 
 .comment-action-button {

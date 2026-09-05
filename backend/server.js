@@ -2,17 +2,19 @@ const express = require("express");
 const cors = require("cors");
 const dotenv = require("dotenv");
 
-// Database connection
-const connectDB = require("./backend/config/db");
-
-// Routes
-const authRoutes = require("./backend/routes/authRoutes");
-const postRoutes = require("./backend/routes/postRoutes");
+const path = require("path");
 
 // Load environment variables
 dotenv.config({
-    path: "./backend/.env"
+    path: path.join(__dirname, ".env")
 });
+
+// Database connection
+const connectDB = require("./config/db");
+
+// Routes
+const authRoutes = require("./routes/authRoutes");
+const postRoutes = require("./routes/postRoutes");
 
 // Connect to MongoDB
 connectDB();
@@ -25,7 +27,7 @@ app.use(express.json());
 
 app.use(
     "/uploads",
-    express.static("backend/uploads")
+    express.static(path.join(__dirname, "uploads"))
 );
 
 // Test route
