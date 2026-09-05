@@ -12,10 +12,20 @@ const createPost = async (req, res) => {
             });
         }
 
+        let imageUrl = null;
+        if (req.file) {
+            if (req.file.buffer) {
+                const mime = req.file.mimetype || "image/jpeg";
+                imageUrl = `data:${mime};base64,${req.file.buffer.toString("base64")}`;
+            } else if (req.file.filename) {
+                imageUrl = req.file.filename;
+            }
+        }
+
         const post = await Post.create({
             user: req.user.userId,
             text: text || "",
-            image: req.file ? req.file.filename : null
+            image: imageUrl
         });
 
         res.status(201).json({

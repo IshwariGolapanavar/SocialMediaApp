@@ -317,7 +317,11 @@ function Home() {
                                     {post.image && (
                                         <div className="post-image-wrapper">
                                             <img
-                                                src={`${API_BASE_URL}/uploads/${post.image}`}
+                                                src={
+                                                    post.image.startsWith("data:") || post.image.startsWith("http")
+                                                        ? post.image
+                                                        : `${API_BASE_URL}/uploads/${post.image}`
+                                                }
                                                 alt="Post"
                                                 className="post-image-modern"
                                                 loading="lazy"
